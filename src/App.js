@@ -1,12 +1,14 @@
 import React from 'react';
-import Carousel from './components/carousel/Carousel'
+import Carousel from './containers/carousel/Carousel'
 
 
 function App() {
     
     return (
-        <Carousel/>
-    )
+		<div>
+            <Carousel />
+		</div>
+    );
 
 }
 
