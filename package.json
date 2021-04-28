@@ -4,6 +4,8 @@
   "description": "Carousel component for Scandiweb application ",
   "main": "index.js",
   "scripts": {
+    "webpack": "webpack",
+    "start":"webpack serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
