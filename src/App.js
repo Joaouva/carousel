@@ -2,6 +2,7 @@ import React from 'react';
 import Carousel from './containers/carousel/Carousel'
 
 
+
 function App() {
 
   const Gallery = [
@@ -13,7 +14,8 @@ function App() {
     
     return (
 		<div>
-        <Carousel slides={Gallery}/>
+			<Carousel slides={Gallery} />
+			{/* <Slider slides={Gallery}/> */}
 		</div>
     );
 

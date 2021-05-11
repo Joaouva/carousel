@@ -13,13 +13,34 @@ export const CarouselContent = styled.div`
 	transform: translateX(-${(props) => props.translate}px);
 	transition: transform ease-out ${(props) => props.transition}s;
 	height: 100%;
-	width: ${(props) => props.width}px;
+	width: 100vw;
     display: flex;
+	margin: 0;
 `;
 
 
 export const Image = styled.img`
-    height: 100vh;
 	width: ${(props) => props.width}px;
     position: relative;
+`;
+
+
+export const Main = styled.div`
+	background-color: green;
+	overflow: hidden;
+	position: relative;
+	width: ${(props) => props.width}px;
+
+`;
+
+export const Swiper = styled.div`
+	display: flex;
+	overflow-x: visible;
+	transition-property: transform;
+	will-change: transform;
+`;
+
+export const Slide = styled.div`
+	object-fit: contain;
+	width: ${(props) => props.width}px;
 `;
