@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Slider, Image, CarouselContent } from "./style";
+import { Slider, CarouselContent } from "./style";
 import Arrow from '../../components/Arrows/Arrows';
 import Dots from "../../components/Dots/Dots";
-import FirstSlide from "../../components/Slides/firstSlide";
-import Second from "../../components/Slides/Second";
 
 const Carousel = (props) => {
 	//creating a new array with only the visible slides (3)
 	//increment efficiency in the app by avoiding the render of every slides
 	const { slides } = props;
 
-	const firstImage = FirstSlide;
-	const secondImage = Second;
+	const firstImage = slides[0];
+	const secondImage = slides[1];
+	const thirdImage = slides[slides.length -1];
+
 
 	//getting the with of the screen to adapt the image
 	const width = () => window.innerWidth;
@@ -20,9 +20,9 @@ const Carousel = (props) => {
 	// translate and transition will be responsible to move carousel content
 	const [state, setState] = useState({
 		activeIndex: 0,
-		translate: 0,
+		translate: width(),
 		transition: 0.45,
-		_images: [firstImage, secondImage],
+		_images: [thirdImage, firstImage, secondImage],
 	});
 
 	const { translate, transition, activeIndex, _images } = state;
@@ -36,7 +36,7 @@ const Carousel = (props) => {
 
 	useEffect(() => {
 		autoPlay.current = nextSlide;
-		//transitionRef.current = smoothTransition;
+		transitionRef.current = smoothTransition;
 		resizeRef.current = handleResize;
 	});
 
@@ -50,41 +50,49 @@ const Carousel = (props) => {
 				transitionRef.current();
 			}
 		};
-		//animation time - 3000 - increase to slower the slider or decrease to faster it
-		const interval = setInterval(play, 5000);
+
+		const resize = () => {
+			resizeRef.current()
+		}
+		//animation time - 15000 - increase to slower the slider or decrease to faster it
+		const interval = setInterval(play, 12000);
 		//each time the transtionend event ends will trigger the smooth function - avoid the array to update each time o hover the arrays
 		const transitionEnd = window.addEventListener("transitionend", smooth);
 
+		const onResize = window.addEventListener("resize", resize);
+
 		return () => {
-			clearInterval(interval);
+			clearInterval(interval)
 			window.removeEventListener("transitionend", transitionEnd);
 			window.removeEventListener("resize", onResize);
 		};
 	}, []);
 
-	const handleResize = () => {
-		setState({ ...state, translate: width(), transition: 0 });
-	};
-
 	useEffect(() => {
 		if (transition === 0) setState({ ...state, transition: 0.45 });
 	}, [transition]);
 
+	const handleResize = () => {
+		setState({ ...state, translate: width(), transition: 0 });
+	};
+
+
 	//logic to prevent the _images array of updating until each slide have finish
-	// const smoothTransition = () => {
-	// 	let _images = [];
+	const smoothTransition = () => {
+		let _images = [];
 
-	// 	if (activeIndex === slides.length - 1) _images = [slides[slides.length - 2], firstImage];
-	// 	else if (activeIndex === 0) _images = [firstImage, secondImage];
-	// 	else _images = slides.slice(activeIndex - 1, activeIndex + 2);
+		if (activeIndex === slides.length - 1)
+			_images = [slides[slides.length - 2], thirdImage, firstImage];
+		else if (activeIndex === 0) _images = [thirdImage, firstImage, secondImage];
+		else _images = slides.slice(activeIndex - 1, activeIndex + 2);
 
-	// 	setState({
-	// 		...state,
-	// 		_images,
-	// 		transition: 0,
-	// 		translate: width(),
-	// 	});
-	// };
+		setState({
+			...state,
+			_images,
+			transition: 0,
+			translate: width(),
+		});
+	};
 
 	//getting the next slide with the arrows
 	const nextSlide = () => {
@@ -107,7 +115,7 @@ const Carousel = (props) => {
 
 	//Touch support
 	const handleTouch = (e) => {
-		console.log(e.changedTouches[0].clientX);
+		//get the touch direction to know if it should move forward or back
 		if (e.changedTouches[0].clientX < 50) {
 			nextSlide();
 		} else if (e.changedTouches[0].clientX > 350){
@@ -126,7 +134,7 @@ const Carousel = (props) => {
 				onTouchEnd={handleTouch}
 			>
 				{_images.map((_slide, i) => (
-					<div>
+					<div key={i}>
 						<_slide></_slide>
 					</div>
 				))}
