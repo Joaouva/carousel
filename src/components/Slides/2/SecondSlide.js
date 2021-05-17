@@ -57,6 +57,7 @@ const animationThirdLine = keyframes`
   }
   50% {
     opacity: 0.7;
+	box-shadow: 5px 5px 15px 5px #000000;
   }
   100% {
     opacity: 1;
@@ -68,7 +69,6 @@ const animationThirdLine = keyframes`
 const LineOne = styled.h1`
 	animation: ${animationFirstLine} 2s ease-out;
 	animation-fill-mode: forwards;
-	animation-delay: 2s;
 	opacity: 0;
 	padding: 5px;
 	font-size: 2rem;
@@ -80,7 +80,7 @@ const LineOne = styled.h1`
 const LineTwo = styled.h1`
 	animation: ${animationSecondLine} 2s ease-out;
 	animation-fill-mode: forwards;
-	animation-delay: 6s;
+	animation-delay: 4s;
 	opacity: 0;
 	padding: 5px;
 	font-size: 2rem;
@@ -93,9 +93,9 @@ const LineTwo = styled.h1`
 const LineThree = styled.h1`
 	animation: ${animationThirdLine} 2s ease-out;
 	animation-fill-mode: forwards;
-	animation-delay: 8s;
+	animation-delay: 6s;
 	opacity: 0;
-	padding: 5px;
+	padding: 20px;
 	font-size: 2.5rem;
 	color: white;
 	margin-top: 10%;
@@ -105,10 +105,11 @@ const LineThree = styled.h1`
 const Image = styled.img`
 	animation: ${animationSecondLine} 2s ease-out;
 	animation-fill-mode: forwards;
-	animation-delay: 4s;
+	animation-delay: 2s;
 	filter: brightness(0) invert(1);
 	width: 30vh;
 	opacity: 0;
+	padding: 5px;
 `;
 
 function Second() {
@@ -117,7 +118,7 @@ function Second() {
 		<Main>
 			<LineOne>I heard that</LineOne>
 			<Image src="https://www.marello.com/wp-content/uploads/2019/04/Scandiweb_logo-1.png"></Image>
-			<LineTwo>are looking for a</LineTwo>
+			<LineTwo>is looking for a</LineTwo>
 			<LineThree>React Developer</LineThree>
 		</Main>
     );

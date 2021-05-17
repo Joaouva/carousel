@@ -55,7 +55,7 @@ const Carousel = (props) => {
 			resizeRef.current()
 		}
 		//animation time - 15000 - increase to slower the slider or decrease to faster it
-		const interval = setInterval(play, 12000);
+		const interval = setInterval(play, 10000);
 		//each time the transtionend event ends will trigger the smooth function - avoid the array to update each time o hover the arrays
 		const transitionEnd = window.addEventListener("transitionend", smooth);
 

@@ -51,7 +51,7 @@ const FirstLine = styled.div`
 `;
 
 const SecondLine = styled.div`
-	width: 17ch;
+	width: 19ch;
 	animation: ${typing} 2s steps(22), ${blink} 4s ease-out;
 	animation-delay: 2s;
 	animation-fill-mode: forwards;
@@ -99,7 +99,7 @@ function ThirdSlide() {
 	return (
 		<Main>
 			<FirstLine>Well...</FirstLine>
-			<SecondLine>You will not believe it</SecondLine>
+			<SecondLine>You will not believe this</SecondLine>
 			<ThirdLine>but I'm a</ThirdLine>
 			<FourthLine>React Developer!</FourthLine>
 			<Image src="../../../images/MemojiJU.png"></Image>
